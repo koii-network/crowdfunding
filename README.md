@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/koii-network/koii.X/main/.github/images/koii_logo.svg" width="224px"/><br/>
-  Create Koii Fundraise :fish:
+  Create Koii Fundraise :fish: :moneybag:
 </h1>
 <p align="center">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white" alt="typescript" />&nbsp;
@@ -77,7 +77,23 @@ export default config;
 
 # Deploy to Arweave
 
-Few simple steps to deploy to your crowdfunding portal to Arweave
+Few simple steps to deploy to your crowdfunding portal to Arweave:
+
+1. Install [arkb](https://github.com/textury/arkb) globally on your machine. arkb runs using NodeJS and NPM. You must have both installed on your machine for it to work.
+
+```
+npm install -g arkb
+```
+
+2. Put your Arweave wallet keyfile inside the root folder under as `wallet.json`
+
+3. Finally, Run:
+
+```
+ yarn deploy
+```
+
+To deploy to arweave :tada:
 
 # App Customization
 
@@ -87,9 +103,9 @@ Edit the [app-config](./src/config/app-config.ts) file to change the basic detai
 const config = {
   lang: "en", // language of your website
   locale: "en_US", // locale of your website
-  title: "Koii.X — Your Koii DApp",
-  description: "Create Koii DApp",
-  canonical: "http://koii-x.vercel.app/", // Your production website link
+  title: "Koii Fundraiser DApp",
+  description: "Create Koii Fundraiser",
+  canonical: "https://crowdfunding-koii.vercel.app/", // Your production website link
   twitterHandle: "@KoiiNetwork", // Twitter username
   companyName: "Koii"
 };
