@@ -1,0 +1,1 @@
+export { useSwiperRef } from "./useSwiperRef";

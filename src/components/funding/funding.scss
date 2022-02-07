@@ -1,0 +1,9 @@
+.thumb-slider {
+  &--wrapper {
+    cursor: pointer;
+    &.swiper-slide-thumb-active img {
+      border: 3px solid var(--chakra-colors-blue-500);
+      border-radius: 12px;
+    }
+  }
+}
