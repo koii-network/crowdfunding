@@ -29,7 +29,7 @@ After the installation is done head to the installed project and inside it run `
 
 # Fundraiser Customization
 
-To customize your fundraiser head to [./src/config/funding-config.tsx](./src/components/funding/funding-config.tsx) file in your app, you'll notice a `config` that you can change to match your portal config.
+To customize your fundraiser head to [./src/config/funding-config.tsx](./src/components/funding/funding-config.tsx) file in your app that you can change to match your portal config.
 
 Example:
 
