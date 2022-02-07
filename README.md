@@ -29,9 +29,7 @@ After the installation is done head to the installed project and inside it run `
 
 # Fundraiser Customization
 
-To customize your fundraiser head to [./src/config/funding-config.tsx](./src/config/funding-config.tsx) file in your app, you'll notice a `config` that you can change to match your portal config.
-
-[Demo](https://crowdfunding-koii.vercel.app/)
+To customize your fundraiser head to [./src/config/funding-config.tsx](./src/components/funding/funding-config.tsx) file in your app that you can change to match your portal config.
 
 Example:
 
@@ -80,17 +78,21 @@ export default config;
 # Deploy to Arweave
 
 Few simple steps to deploy to your crowdfunding portal to Arweave:
-1. Install [arkb](https://github.com/textury/arkb) globally on your machine.
-arkb runs using NodeJS and NPM. You must have both installed on your machine for it to work.
+
+1. Install [arkb](https://github.com/textury/arkb) globally on your machine. arkb runs using NodeJS and NPM. You must have both installed on your machine for it to work.
+
 ```
 npm install -g arkb
 ```
+
 2. Put your Arweave wallet keyfile inside the root folder under as `wallet.json`
 
 3. Finally, Run:
+
 ```
  yarn deploy
 ```
+
 To deploy to arweave :tada:
 
 # App Customization
