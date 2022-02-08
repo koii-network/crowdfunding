@@ -41,7 +41,7 @@ export function FundingPage() {
                   {config?.title}
                 </Text>
                 <Text noOfLines={2} lineHeight="normal">
-                  Fighting plagiarism with a searchable, creator-owned world wide registry. Get rewarded for your work.
+                  {config?.description}
                 </Text>
 
                 {/* Company */}

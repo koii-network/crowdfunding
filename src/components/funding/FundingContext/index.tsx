@@ -3,6 +3,7 @@ import config from "config/funding-config";
 
 interface ConfigInterface {
   title: string;
+  description: string;
   companyName: string;
   fundGoal: number;
   images: Array<{ src: string }>;

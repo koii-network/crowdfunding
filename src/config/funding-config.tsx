@@ -1,5 +1,6 @@
 const config = {
   title: "Plagiarism Registry DAO",
+  description: "Fighting plagiarism with a searchable, creator-owned world wide registry. Get rewarded for your work.",
   companyName: "Koii Network Creator Studio",
   fundGoal: 1000,
   images: [
