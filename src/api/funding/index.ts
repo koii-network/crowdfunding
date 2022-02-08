@@ -59,21 +59,51 @@ export const sendAr = async ({ to, amount }: { to: string; amount?: number }) =>
   await arweave.transactions.post(transaction);
 };
 
-export const sendToken = async ({ from, to, amount, currency }: { from?: string; to: string; amount?: number; currency: string }) => {
-  switch (currency) {
-    case "eth":
-      return await sendEth({
-        from,
-        to,
-        amount
-      });
-    case "ar":
-      return await sendAr({
-        to,
-        amount
-      });
-    default:
-      throw new Error("Currency not supported yet.");
+export const sendEthWithFinnie = async ({ from, to, amount }: { from?: string; to: string; amount?: number }) => {};
+export const sendArWithFinnie = async ({ from, to, amount }: { from?: string; to: string; amount?: number }) => {};
+
+interface SendTokenProps {
+  from?: string;
+  to: string;
+  amount?: number;
+  currency: string;
+  wallet?: "finnie" | "metamask" | "arconnect";
+}
+
+export const sendToken = async ({ from, to, amount, currency, wallet }: SendTokenProps) => {
+  if (wallet === "finnie") {
+    switch (currency) {
+      case "eth":
+        return await sendEthWithFinnie({
+          from,
+          to,
+          amount
+        });
+      case "ar":
+        return await sendArWithFinnie({
+          from,
+          to,
+          amount
+        });
+      default:
+        throw new Error("Currency not supported yet.");
+    }
+  } else {
+    switch (currency) {
+      case "eth":
+        return await sendEth({
+          from,
+          to,
+          amount
+        });
+      case "ar":
+        return await sendAr({
+          to,
+          amount
+        });
+      default:
+        throw new Error("Currency not supported yet.");
+    }
   }
 };
 

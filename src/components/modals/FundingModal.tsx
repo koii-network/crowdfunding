@@ -14,6 +14,10 @@ interface Props {
   onClose: () => void;
 }
 
+interface ConnectToWalletProps {
+  walletType: "metamask" | "arconnect" | "finnie";
+}
+
 export function FundingModal({ isOpen, onClose }: Props) {
   // config
   const {
@@ -21,22 +25,21 @@ export function FundingModal({ isOpen, onClose }: Props) {
     dispatch
   } = useFunding();
 
-  const nfts = config?.nfts;
-
   const toast = useToast();
   const [status, setStatus] = useState<string>("idle");
 
   /* Helpers */
 
   const doSendToken = async () => {
-    // console.log(`Sending ${fundModal.tokenAmount} to ${config?.fundAddress}...`);
+    // console.log(`Sending ${fundModal.tokenAmount} using ${fundModal?.walletType} wallet with address ${fundModal.walletAddress}`);
     try {
       setStatus("loading");
       await sendToken({
         from: fundModal.walletAddress,
         to: config.fundAddress,
         amount: fundModal.tokenAmount,
-        currency: config?.paymentType
+        currency: config?.paymentType,
+        wallet: fundModal?.walletType
       }).then(() => {
         toast({
           status: "success",
@@ -67,17 +70,17 @@ export function FundingModal({ isOpen, onClose }: Props) {
     });
   };
 
-  const doConnectToWallet = async () => {
+  const doConnectToWallet = async ({ walletType }: ConnectToWalletProps) => {
     setStatus("loading");
-    await connectToWallet(config?.paymentType)
+    await connectToWallet(walletType)
       .then(async res => {
         setStatus("idle");
         /* Connected, Save address */
-        // console.log(`Connected to ${getWalletName(config?.paymentType)} with ${res?.address}`);
         dispatch({
           type: "CHANGE_MODAL_FIELDS",
           payload: {
             walletAddress: res?.address,
+            walletType,
             isWalletConnected: true,
             step: "confirm"
           }
@@ -86,11 +89,31 @@ export function FundingModal({ isOpen, onClose }: Props) {
       .catch(err => {
         setStatus("idle");
         if (err?.message === "extension_not_installed") {
-          toast({ status: "error", title: `You don't have ${getWalletName(config?.paymentType)} installed`, isClosable: true });
+          toast({
+            status: "error",
+            title: (
+              <>
+                You don't have{" "}
+                <Text as="span" textTransform="capitalize">
+                  {walletType}
+                </Text>{" "}
+                installed
+              </>
+            ),
+            isClosable: true
+          });
         } else {
           toast({
             status: "error",
-            title: `There was an error connecting ${getWalletName(config?.paymentType)}. Please try again.`,
+            title: (
+              <>
+                There was an error connecting{" "}
+                <Text as="span" textTransform="capitalize">
+                  {walletType}
+                </Text>
+                . Please try again.
+              </>
+            ),
             isClosable: true
           });
         }
@@ -111,23 +134,24 @@ export function FundingModal({ isOpen, onClose }: Props) {
   const isModalCentered = step !== "select-payment";
   const mainImage = config?.images?.[0];
 
+  const connectorStyles = {
+    w: "100%",
+    variant: "outline",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.16)",
+    size: "lg"
+  };
+
   const renderConnector = () => {
-    const connectorStyles = {
-      w: "100%",
-      variant: "outline",
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.16)",
-      size: "lg"
-    };
     switch (config?.paymentType) {
       case "eth":
         return (
-          <Button onClick={doConnectToWallet} isLoading={status === "loading"} {...connectorStyles}>
+          <Button onClick={() => doConnectToWallet({ walletType: "metamask" })} isLoading={status === "loading"} {...connectorStyles}>
             MetaMask
           </Button>
         );
       case "ar":
         return (
-          <Button onClick={doConnectToWallet} isLoading={status === "loading"} {...connectorStyles}>
+          <Button onClick={() => doConnectToWallet({ walletType: "arconnect" })} isLoading={status === "loading"} {...connectorStyles}>
             ArConnect
           </Button>
         );
@@ -157,12 +181,6 @@ export function FundingModal({ isOpen, onClose }: Props) {
           {/* Select Payment */}
           {step === "select-payment" && (
             <ModalBody alignItems="flex-start">
-              {/* Nfts */}
-              {/* <Stack d="block" w="100%" spacing="8" alignItems="flex-start" mb="8">
-                {nfts?.map((nft: any, idx: number) => (
-                  <FundingCard key={idx} item={nft} />
-                ))}
-              </Stack> */}
               <FundingPledgeForm onSubmit={onPledgeFormSubmit} />
             </ModalBody>
           )}
@@ -174,6 +192,9 @@ export function FundingModal({ isOpen, onClose }: Props) {
                 <Text fontWeight="600" fontSize="xl">
                   Connect a Wallet
                 </Text>
+                <Button onClick={() => doConnectToWallet({ walletType: "finnie" })} isLoading={status === "loading"} {...connectorStyles}>
+                  Finnie
+                </Button>
                 {renderConnector()}
               </Stack>
             </ModalBody>

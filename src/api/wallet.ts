@@ -1,3 +1,6 @@
+import { connectToExtension, initExtension } from "./finnie";
+import { getAddress } from "./sdk";
+
 export const connectToMetaMask = async () => {
   if (typeof window.ethereum !== "undefined") {
     /* MetaMask is installed */
@@ -28,13 +31,36 @@ export const connectToArConnect = async () => {
   }
 };
 
-export const connectToWallet = async (currency: string) => {
-  switch (currency) {
-    case "eth":
+export const connectToFinnie = async () => {
+  try {
+    let address = null;
+    // Check if extension exists and get permissions.
+    await initExtension();
+    // Connect to extension
+    await connectToExtension();
+    // Get finnie address
+    await getAddress().then(async res => {
+      if (res.status === 200) {
+        address = res?.data;
+      } else {
+        throw new Error("Error getting finnie address!");
+      }
+    });
+    return { address };
+  } catch (error) {
+    throw new Error("error_connecting_to_finnie");
+  }
+};
+
+export const connectToWallet = async (wallet: string) => {
+  switch (wallet) {
+    case "metamask":
       return await connectToMetaMask();
-    case "ar":
+    case "arconnect":
       return await connectToArConnect();
+    case "finnie":
+      return await connectToFinnie();
     default:
-      throw new Error("Currency not supported yet");
+      throw new Error("Wallet not supported yet");
   }
 };

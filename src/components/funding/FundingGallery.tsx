@@ -61,7 +61,16 @@ export function FundingGallery() {
         </Swiper>
       </Box>
 
-      <Box pos="relative" px="55px" py="2">
+      <Box
+        pos="relative"
+        px="55px"
+        py="2"
+        sx={{
+          "& .swiper": {
+            height: "100%"
+          }
+        }}
+      >
         <Swiper
           onSwiper={setThumbsSwiper}
           watchOverflow

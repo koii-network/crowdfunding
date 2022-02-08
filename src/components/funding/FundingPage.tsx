@@ -7,6 +7,8 @@ import { Box, Grid, Flex, Stack, Text, Image, Button, Link } from "@chakra-ui/re
 import { RiExternalLinkLine } from "react-icons/ri";
 // utils
 import { getFundContract } from "api/funding";
+// assets
+import Logo from "assets/logo.png";
 
 export function FundingPage() {
   // config
@@ -45,7 +47,7 @@ export function FundingPage() {
                 {/* Company */}
                 <Stack direction="row" spacing="18px" align="center" mt="22px" mb={{ base: "30px", lg: "40px" }}>
                   {/* Logo */}
-                  <Image src={config?.companyLogo} alt="logo" boxSize="52px" rounded="full" />
+                  <Image src={Logo} alt="logo" boxSize="52px" rounded="full" />
                   <div>
                     <Text fontSize="lg" mb="2px">
                       {config?.companyName}

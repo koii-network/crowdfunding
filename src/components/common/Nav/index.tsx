@@ -1,6 +1,5 @@
 // ui
 import { Button, Box, Flex, Heading } from "@chakra-ui/react";
-// icons
 
 interface Props {
   title: string;
@@ -14,6 +13,7 @@ export function Nav({ title, openFundingModal }: Props) {
         <Heading size="md" fontWeight="500">
           {title}
         </Heading>
+
         <Button onClick={openFundingModal}>Back Project</Button>
       </Flex>
     </Box>

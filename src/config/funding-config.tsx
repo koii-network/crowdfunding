@@ -1,6 +1,5 @@
 const config = {
   title: "Plagiarism Registry DAO",
-  companyLogo: "https://pbs.twimg.com/profile_images/1424786684194041859/lkDa9l1U_400x400.png",
   companyName: "Koii Network Creator Studio",
   fundGoal: 1000,
   images: [
