@@ -110,7 +110,7 @@ const config = {
   companyName: "Koii"
 };
 ```
-
+To change the text under your app name edit the content at /src/components/funding/FundingPage.tsx line:42
 To change the favicon, head to [public](./public) folder and replace the `favicon.svg` with yours.\
 To change the logo, head to [assets](./src/assets) folder and replace the `logo.png` with yours.
 
