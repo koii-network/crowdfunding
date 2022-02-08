@@ -36,7 +36,7 @@ Example:
 ```javascript
 const config = {
   title: "Plagiarism Registry DAO", // Project title
-  title: "Fighting plagiarism with a searchable, creator-owned world wide registry. Get rewarded for your work.", // Project description
+  description: "Fighting plagiarism with a searchable, creator-owned world wide registry. Get rewarded for your work.", // Project description
   companyName: "Koii Network Creator Studio",
   fundGoal: 1000, // Your funding goal in "eth"
   images: [
