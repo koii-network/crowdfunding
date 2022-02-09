@@ -51,6 +51,7 @@ export function FundingModal({ isOpen, onClose }: Props) {
         });
       });
     } catch (error) {
+      console.log(error);
       setStatus("idle");
       toast({
         status: "error",
@@ -192,9 +193,11 @@ export function FundingModal({ isOpen, onClose }: Props) {
                 <Text fontWeight="600" fontSize="xl">
                   Connect a Wallet
                 </Text>
-                <Button onClick={() => doConnectToWallet({ walletType: "finnie" })} isLoading={status === "loading"} {...connectorStyles}>
-                  Finnie
-                </Button>
+                {config?.paymentType !== "eth" && (
+                  <Button onClick={() => doConnectToWallet({ walletType: "finnie" })} isLoading={status === "loading"} {...connectorStyles}>
+                    Finnie
+                  </Button>
+                )}
                 {renderConnector()}
               </Stack>
             </ModalBody>

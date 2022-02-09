@@ -60,7 +60,22 @@ export const sendAr = async ({ to, amount }: { to: string; amount?: number }) =>
 };
 
 export const sendEthWithFinnie = async ({ from, to, amount }: { from?: string; to: string; amount?: number }) => {};
-export const sendArWithFinnie = async ({ from, to, amount }: { from?: string; to: string; amount?: number }) => {};
+export const sendArWithFinnie = async ({ to, amount }: { to: string; amount?: number }) => {
+  const amountStr = amount?.toString() || "";
+  const quantity = arweave.ar.arToWinston(amountStr);
+  let transaction = await arweave.createTransaction({
+    target: to,
+    quantity
+  });
+  await window.koiiWallet.sign({
+    data: transaction?.data ? JSON.stringify(transaction?.data) : null,
+    data_root: transaction.data_root,
+    data_size: transaction.data_size,
+    tags: transaction.tags,
+    quantity: amountStr,
+    target: transaction.target
+  });
+};
 
 interface SendTokenProps {
   from?: string;
@@ -81,7 +96,6 @@ export const sendToken = async ({ from, to, amount, currency, wallet }: SendToke
         });
       case "ar":
         return await sendArWithFinnie({
-          from,
           to,
           amount
         });
