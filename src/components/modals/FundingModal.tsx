@@ -5,7 +5,7 @@ import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Stack, 
 import { FundingPledgeForm } from "components/funding";
 // api
 import { connectToWallet } from "api/wallet";
-import { getWalletName, sendToken } from "api/funding";
+import { sendToken } from "api/funding";
 // icon
 import { HiOutlineArrowLeft } from "react-icons/hi";
 

@@ -67,14 +67,8 @@ export const sendArWithFinnie = async ({ to, amount }: { to: string; amount?: nu
     target: to,
     quantity
   });
-  await window.koiiWallet.sign({
-    data: transaction?.data ? JSON.stringify(transaction?.data) : null,
-    data_root: transaction.data_root,
-    data_size: transaction.data_size,
-    tags: transaction.tags,
-    quantity: amountStr,
-    target: transaction.target
-  });
+  await window.koiiWallet.sign(transaction);
+  await arweave.transactions.post(transaction);
 };
 
 interface SendTokenProps {
