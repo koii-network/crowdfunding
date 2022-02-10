@@ -51,7 +51,6 @@ export function FundingModal({ isOpen, onClose }: Props) {
         });
       });
     } catch (error) {
-      console.log(error);
       setStatus("idle");
       toast({
         status: "error",
