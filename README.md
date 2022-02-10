@@ -29,14 +29,14 @@ After the installation is done head to the installed project and inside it run `
 
 # Fundraiser Customization
 
-To customize your fundraiser head to [./src/config/funding-config.tsx](./src/components/funding/funding-config.tsx) file in your app that you can change to match your portal config.
+To customize your fundraiser head to [./src/config/funding-config.tsx](./src/config/funding-config.tsx) file in your app that you can change to match your portal config.
 
 Example:
 
 ```javascript
 const config = {
   title: "Plagiarism Registry DAO", // Project title
-  companyLogo: "https://pbs.twimg.com/profile_images/1424786684194041859/lkDa9l1U_400x400.png", // Logo to appear in the navbar.
+  description: "Fighting plagiarism with a searchable, creator-owned world wide registry. Get rewarded for your work.", // Project description
   companyName: "Koii Network Creator Studio",
   fundGoal: 1000, // Your funding goal in "eth"
   images: [
@@ -75,6 +75,8 @@ const config = {
 export default config;
 ```
 
+To change the logo of the fundraiser head to [./src/assets/](./src/assets) file in your app and replace the `logo.png` with your logo.
+
 # Deploy to Arweave
 
 Few simple steps to deploy to your crowdfunding portal to Arweave:
@@ -97,7 +99,7 @@ To deploy to arweave :tada:
 
 # App Customization
 
-Edit the [app-config](./src/config/app-config.ts) file to change the basic details about your app. e.g.
+Edit the [./src/config/app-config](./src/config/app-config.ts) file to change the basic details about your app. e.g.
 
 ```javascript
 const config = {
@@ -111,8 +113,7 @@ const config = {
 };
 ```
 
-To change the favicon, head to [public](./public) folder and replace the `favicon.svg` with yours.\
-To change the logo, head to [assets](./src/assets) folder and replace the `logo.png` with yours.
+To change the favicon, head to [public](./public) folder and replace the `favicon.svg` with yours.
 
 # Environment
 

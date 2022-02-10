@@ -3,7 +3,7 @@ import config from "config/funding-config";
 
 interface ConfigInterface {
   title: string;
-  companyLogo: string;
+  description: string;
   companyName: string;
   fundGoal: number;
   images: Array<{ src: string }>;
@@ -27,6 +27,7 @@ interface ContextInterface {
       tokenAmount?: number;
       isWalletConnected: boolean;
       walletAddress?: string;
+      walletType?: "metamask" | "arconnect" | "finnie";
     };
   };
   dispatch: React.Dispatch<ActionType>;
@@ -67,7 +68,8 @@ const reducer = (state: typeof initialState, action: ActionType) => {
           ...state.fundModal,
           isOpen: false,
           step: "select-payment",
-          tokenAmount: undefined
+          tokenAmount: undefined,
+          walletType: undefined
         }
       };
     case "CHANGE_MODAL_FIELDS":
