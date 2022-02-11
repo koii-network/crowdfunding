@@ -67,7 +67,7 @@ export const sendArWithFinnie = async ({ to, amount }: { to: string; amount?: nu
     target: to,
     quantity
   });
-  await window.koiiWallet.sign(transaction);
+  await arweave.transactions.sign(transaction);
   await arweave.transactions.post(transaction);
 };
 
